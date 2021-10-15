@@ -12,7 +12,7 @@ class Shop {
     }
     updateQuality() {
         //Parcours les items
-        for (var i = 0; i < this.items.length; i++) {
+        for (let i = 0; i < this.items.length; i++) {
             //Vérifie si c'est pas un Brie ET pas un Backstage
             if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') { // Checkname x2
 
