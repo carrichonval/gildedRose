@@ -9,7 +9,7 @@ class Item {
 class Operations{
 
     increaseQuality(itemQuality,number){
-
+        return itemQuality += number;
     }
 
     decreaseQuality(itemQuality,number){
@@ -55,22 +55,22 @@ class Shop {
     
                     if (item.quality > QUALITY_MIN) { //CheckQuality
                         if (item.name != 'Sulfuras, Hand of Ragnaros') { //checkName
-                            item.quality = item.quality - 1; //increase
+                            item.quality = item.quality - 1; //decrease
                         }
                     }
     
                 } else {
                     if (item.quality < QUALITY_MAX) { // checkQuality
-                        item.quality = item.quality + 1; //increaseQaulity
+                        item.quality = Operations.increaseQuality(item.quality,1);
                         if (item.name == 'Backstage passes to a TAFKAL80ETC concert') { //checkname
                             if (item.sellIn <= TEN_DAYS) { //checkSellIn
                                 if (item.quality < QUALITY_MAX) { //checkQuality
-                                    item.quality = item.quality + 1; //increaseQuality
+                                    item.quality = Operations.increaseQuality(item.quality,1);
                                 }
                             }
                             if (item.sellIn <= FIVE_DAYS) { //checkSellIn
                                 if (item.quality < QUALITY_MAX) { //checkQuality
-                                    item.quality = item.quality + 1; //increaseQuality
+                                    item.quality = Operations.increaseQuality(item.quality,1);
                                 }
                             }
                         }
@@ -89,7 +89,7 @@ class Shop {
                         if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {//CheckName
                             if (item.quality > QUALITY_MIN) {//CheckQuality
                                 if (item.name != 'Sulfuras, Hand of Ragnaros') {//CheckName
-                                    item.quality = item.quality - 1;//increaseQality
+                                    item.quality = item.quality - 1;//decreaseQality
                                 }
                             }
                         } else {
@@ -97,7 +97,7 @@ class Shop {
                         }
                     } else {
                         if (item.quality < QUALITY_MAX) {//checkQuality
-                            item.quality = item.quality + 1; // increaseQuality
+                            item.quality = Operations.increaseQuality(item.quality,1);
                         }
                     }
                 }
