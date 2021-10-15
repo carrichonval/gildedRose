@@ -27,7 +27,7 @@ class Checker{
     }
 
     checkLegend(itemName,verifyName){
-
+        return itemName !== verifyName;
     }
 
     checkSellIn(itemSellIn,verifySellIn){
@@ -54,6 +54,7 @@ class Shop {
     updateQuality() {
         //Parcours les items
         const operations = new Operations();
+        const checker = new Checker();
 
         this.items.forEach((item) => {
 
@@ -87,7 +88,7 @@ class Shop {
                 /*-------------------------------------------------------------*/
     
                 //Si c'est Sulfuras
-                if (item.name != 'Sulfuras, Hand of Ragnaros') { // CheckLegend
+                if (checker.checkLegend(item.name, 'Sulfuras, Hand of Ragnaros')) { // CheckLegend
                     item.sellIn = item.sellIn - 1; //increaseQuality
                 }
                 /*-------------------------------------------------------------*/
