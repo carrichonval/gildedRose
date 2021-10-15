@@ -16,7 +16,7 @@ class Operations{
     }
 
     decreaseQuality(itemQuality,number){
-        
+        return itemQuality - number;
     }
 }
 
@@ -62,7 +62,7 @@ class Shop {
     
                     if (item.quality > QUALITY_MIN) { //CheckQuality
                         if (item.name != 'Sulfuras, Hand of Ragnaros') { //checkName
-                            item.quality = item.quality - 1; //decrease
+                            item.quality = operations.decreaseQuality(item.quality,1);
                         }
                     }
     
@@ -96,7 +96,7 @@ class Shop {
                         if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {//CheckName
                             if (item.quality > QUALITY_MIN) {//CheckQuality
                                 if (item.name != 'Sulfuras, Hand of Ragnaros') {//CheckName
-                                    item.quality = item.quality - 1;//decreaseQality
+                                    item.quality =  operations.decreaseQuality(item.quality,1);
                                 }
                             }
                         } else {
