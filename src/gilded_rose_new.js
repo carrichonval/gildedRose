@@ -24,7 +24,7 @@ class Checker{
     }
 
     checkSellIn(itemSellIn,verifySellIn){
-
+        return itemSellIn < verifySellIn;
     }
 
     checkQuality(itemQuality,verifyQuality){
@@ -35,8 +35,8 @@ class Checker{
 
 const QUALITY_MIN = 0;
 const QUALITY_MAX = 50;
-const FIVE_DAYS = 5;
-const TEN_DAYS = 10;
+const SIX_DAYS = 6;
+const ELEVEN_DAYS = 11;
 const SELLIN_MIN = 0;
 
 class Shop {
@@ -64,12 +64,12 @@ class Shop {
                     if (item.quality < QUALITY_MAX) { // checkQuality
                         item.quality = operations.increaseQuality(item.quality,1);
                         if (checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-                            if (item.sellIn <= TEN_DAYS) { //checkSellIn
+                            if (checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
                                 if (item.quality < QUALITY_MAX) { //checkQuality
                                     item.quality = operations.increaseQuality(item.quality,1);
                                 }
                             }
-                            if (item.sellIn <= FIVE_DAYS) { //checkSellIn
+                            if (checker.checkSellIn(item.sellIn, SIX_DAYS)) {
                                 if (item.quality < QUALITY_MAX) { //checkQuality
                                     item.quality = operations.increaseQuality(item.quality,1);
                                 }
@@ -82,10 +82,10 @@ class Shop {
     
                 //Si c'est Sulfuras
                 if (!checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
-                    item.sellIn = item.sellIn - 1; //increaseQuality
+                    item.sellIn = item.sellIn - 1; //decreaseSellIn
                 }
                 /*-------------------------------------------------------------*/
-                if (item.sellIn < SELLIN_MIN) { //checkSellIn
+                if (checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
                     if (!checker.checkName(item.name,'Aged Brie')) {
                         if (!checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (item.quality > QUALITY_MIN) {//CheckQuality
@@ -94,7 +94,7 @@ class Shop {
                                 }
                             }
                         } else {
-                            item.quality = item.quality - item.quality;//mettre a zero
+                            item.quality = operations.decreaseQuality(item.quality, item.quality);
                         }
                     } else {
                         if (item.quality < QUALITY_MAX) {//checkQuality
