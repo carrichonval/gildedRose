@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Gilded Rose kata in Javascript with Mocha",
   "scripts": {
-    "test": "mocha --require @babel/register"
+    "test": "mocha --require @babel/register",
+    "test:approvals": "node ./test/texttest_fixture.js | approvals ./before_result --reporter vscode"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,8 @@
     "@babel/register": "^7.13.0",
     "chai": "^4.2.0",
     "mocha": "^8.4.0"
+  },
+  "dependencies": {
+    "approvals": "^4.0.0-beta.1"
   }
 }
