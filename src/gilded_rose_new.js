@@ -7,9 +7,6 @@ class Item {
 }
 
 class Operations{
-    constructor() {
-        
-    }
 
     increaseQuality(itemQuality,number){
         return itemQuality + number;
@@ -24,10 +21,6 @@ class Checker{
 
     checkName(itemName,verifyName){
         return itemName === verifyName;
-    }
-
-    checkLegend(itemName,verifyName){
-        return itemName !== verifyName;
     }
 
     checkSellIn(itemSellIn,verifySellIn){
@@ -88,7 +81,7 @@ class Shop {
                 /*-------------------------------------------------------------*/
     
                 //Si c'est Sulfuras
-                if (checker.checkLegend(item.name, 'Sulfuras, Hand of Ragnaros')) {
+                if (!checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
                     item.sellIn = item.sellIn - 1; //increaseQuality
                 }
                 /*-------------------------------------------------------------*/
