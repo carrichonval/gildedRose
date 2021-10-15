@@ -14,11 +14,12 @@ Lister les améliorations possibles (fichier texte ou autre)
         o	SELLIN_MIN
     4 -	Faire une classe contenant les différentes méthodes
     5 -	Diviser updateQuality en plusieurs fonctions (une fonction par cas)
-        o	Une fonction checkName(string) (factorise les If name )
-        o	Une fonction checkLegend(string)
+        o	Une fonction checkName(string,string) (factorise les If name )
+        o	Une fonction checkLegend(string,string)
         o	Une fonction checkSellIn(number) (factorise les if sellIn )
         o	Une fonction checkQuality(number) (factorise les if quality )
-        o	Une fonction increaseQuality(number)
+        o	Une fonction increaseQuality(item,number)
+        o	Une fonction decreaseQuality(item,number)
 
 
         

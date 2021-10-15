@@ -6,6 +6,36 @@ class Item {
     }
 }
 
+class Operations{
+
+    increaseQuality(itemQuality,number){
+
+    }
+
+    decreaseQuality(itemQuality,number){
+        
+    }
+}
+
+class Checker{
+
+    checkName(itemName,verifyName){
+
+    }
+
+    checkLegend(itemName,verifyName){
+
+    }
+
+    checkSellIn(itemSellIn,verifySellIn){
+
+    }
+
+    checkQuality(itemQuality,verifyQuality){
+
+    }
+}
+
 class Shop {
     static QUALITY_MIN = 0;
     static QUALITY_MAX = 50;
