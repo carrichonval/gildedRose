@@ -82,7 +82,7 @@ class Shop {
     
                 //Si c'est Sulfuras
                 if (!checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
-                    item.sellIn = item.sellIn - 1; //decreaseSellIn
+                    item.sellIn =operations.decrease(item.sellIn,1); //decreaseSellIn
                 }
                 /*-------------------------------------------------------------*/
                 if (checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
