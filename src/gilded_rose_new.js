@@ -27,8 +27,12 @@ class Checker{
         return itemSellIn < verifySellIn;
     }
 
-    checkQuality(itemQuality,verifyQuality){
+    checkQualityMin(itemQuality,verifyQualityMin){
+        return itemQuality > verifyQualityMin;
+    }
 
+    checkQualityMax(itemQuality,verifyQualityMax){
+        return itemQuality < verifyQualityMax;
     }
 }
 
@@ -54,23 +58,23 @@ class Shop {
                 //Vérifie si c'est pas un Brie ET pas un Backstage
                 if (!checker.checkName(item.name,'Aged Brie') && !checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
     
-                    if (item.quality > QUALITY_MIN) { //CheckQuality
+                    if (checker.checkQualityMin(item.quality,QUALITY_MIN)) {
                         if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
                             item.quality = operations.decrease(item.quality,1);
                         }
                     }
     
                 } else {
-                    if (item.quality < QUALITY_MAX) { // checkQuality
+                    if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
                         item.quality = operations.increase(item.quality,1);
                         if (checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
-                                if (item.quality < QUALITY_MAX) { //checkQuality
+                                if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
                                     item.quality = operations.increase(item.quality,1);
                                 }
                             }
                             if (checker.checkSellIn(item.sellIn, SIX_DAYS)) {
-                                if (item.quality < QUALITY_MAX) { //checkQuality
+                                if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
                                     item.quality = operations.increase(item.quality,1);
                                 }
                             }
@@ -82,13 +86,13 @@ class Shop {
     
                 //Si c'est Sulfuras
                 if (!checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
-                    item.sellIn =operations.decrease(item.sellIn,1); //decreaseSellIn
+                    item.sellIn =operations.decrease(item.sellIn,1);
                 }
                 /*-------------------------------------------------------------*/
                 if (checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
                     if (!checker.checkName(item.name,'Aged Brie')) {
                         if (!checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-                            if (item.quality > QUALITY_MIN) {//CheckQuality
+                            if (checker.checkQualityMin(item.quality,QUALITY_MIN)) {
                                 if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
                                     item.quality =  operations.decrease(item.quality,1);
                                 }
@@ -97,7 +101,7 @@ class Shop {
                             item.quality = operations.decrease(item.quality, item.quality);
                         }
                     } else {
-                        if (item.quality < QUALITY_MAX) {//checkQuality
+                        if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
                             item.quality = operations.increase(item.quality,1);
                         }
                     }

@@ -17,9 +17,10 @@ Lister les améliorations possibles (fichier texte ou autre)
         o	Une fonction checkName(string,string) (factorise les If name )
         o	Une fonction checkLegend(string,string)
         o	Une fonction checkSellIn(number) (factorise les if sellIn )
-        o	Une fonction checkQuality(number) (factorise les if quality )
-        o	Une fonction increaseQuality(item,number)
-        o	Une fonction decreaseQuality(item,number)
+        o	Une fonction checkQualityMin(number) (factorise les if quality )
+        o	Une fonction checkQualityMax(number) (factorise les if quality )
+        o	Une fonction increase(item,number)
+        o	Une fonction decrease(item,number)
 
 
         
