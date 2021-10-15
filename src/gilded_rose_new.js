@@ -23,7 +23,7 @@ class Operations{
 class Checker{
 
     checkName(itemName,verifyName){
-
+        return itemName === verifyName;
     }
 
     checkLegend(itemName,verifyName){
@@ -59,10 +59,10 @@ class Shop {
         this.items.forEach((item) => {
 
                 //Vérifie si c'est pas un Brie ET pas un Backstage
-                if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') { // Checkname x2
+                if (!checker.checkName(item.name,'Aged Brie') && !checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
     
                     if (item.quality > QUALITY_MIN) { //CheckQuality
-                        if (item.name != 'Sulfuras, Hand of Ragnaros') { //checkName
+                        if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
                             item.quality = operations.decreaseQuality(item.quality,1);
                         }
                     }
@@ -70,7 +70,7 @@ class Shop {
                 } else {
                     if (item.quality < QUALITY_MAX) { // checkQuality
                         item.quality = operations.increaseQuality(item.quality,1);
-                        if (item.name == 'Backstage passes to a TAFKAL80ETC concert') { //checkname
+                        if (checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (item.sellIn <= TEN_DAYS) { //checkSellIn
                                 if (item.quality < QUALITY_MAX) { //checkQuality
                                     item.quality = operations.increaseQuality(item.quality,1);
@@ -88,15 +88,15 @@ class Shop {
                 /*-------------------------------------------------------------*/
     
                 //Si c'est Sulfuras
-                if (checker.checkLegend(item.name, 'Sulfuras, Hand of Ragnaros')) { // CheckLegend
+                if (checker.checkLegend(item.name, 'Sulfuras, Hand of Ragnaros')) {
                     item.sellIn = item.sellIn - 1; //increaseQuality
                 }
                 /*-------------------------------------------------------------*/
                 if (item.sellIn < SELLIN_MIN) { //checkSellIn
-                    if (item.name != 'Aged Brie') {//CheckName
-                        if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {//CheckName
+                    if (!checker.checkName(item.name,'Aged Brie')) {
+                        if (!checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (item.quality > QUALITY_MIN) {//CheckQuality
-                                if (item.name != 'Sulfuras, Hand of Ragnaros') {//CheckName
+                                if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
                                     item.quality =  operations.decreaseQuality(item.quality,1);
                                 }
                             }
