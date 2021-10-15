@@ -8,11 +8,11 @@ class Item {
 
 class Operations{
 
-    increaseQuality(itemQuality,number){
+    increase(itemQuality,number){
         return itemQuality + number;
     }
 
-    decreaseQuality(itemQuality,number){
+    decrease(itemQuality,number){
         return itemQuality - number;
     }
 }
@@ -56,22 +56,22 @@ class Shop {
     
                     if (item.quality > QUALITY_MIN) { //CheckQuality
                         if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
-                            item.quality = operations.decreaseQuality(item.quality,1);
+                            item.quality = operations.decrease(item.quality,1);
                         }
                     }
     
                 } else {
                     if (item.quality < QUALITY_MAX) { // checkQuality
-                        item.quality = operations.increaseQuality(item.quality,1);
+                        item.quality = operations.increase(item.quality,1);
                         if (checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
                                 if (item.quality < QUALITY_MAX) { //checkQuality
-                                    item.quality = operations.increaseQuality(item.quality,1);
+                                    item.quality = operations.increase(item.quality,1);
                                 }
                             }
                             if (checker.checkSellIn(item.sellIn, SIX_DAYS)) {
                                 if (item.quality < QUALITY_MAX) { //checkQuality
-                                    item.quality = operations.increaseQuality(item.quality,1);
+                                    item.quality = operations.increase(item.quality,1);
                                 }
                             }
                         }
@@ -90,15 +90,15 @@ class Shop {
                         if (!checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (item.quality > QUALITY_MIN) {//CheckQuality
                                 if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
-                                    item.quality =  operations.decreaseQuality(item.quality,1);
+                                    item.quality =  operations.decrease(item.quality,1);
                                 }
                             }
                         } else {
-                            item.quality = operations.decreaseQuality(item.quality, item.quality);
+                            item.quality = operations.decrease(item.quality, item.quality);
                         }
                     } else {
                         if (item.quality < QUALITY_MAX) {//checkQuality
-                            item.quality = operations.increaseQuality(item.quality,1);
+                            item.quality = operations.increase(item.quality,1);
                         }
                     }
                 }
