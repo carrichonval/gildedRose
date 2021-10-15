@@ -1,0 +1,23 @@
+KATA Gilded Rose
+
+Quelle stratégie adopter pour le refactorer sans douleur ?
+    -	GoldenMaster (comparaison des résultats au début puis à chaque étape de réfracto ) grâce au framework approvals
+
+Lister les améliorations possibles (fichier texte ou autre)
+    1 -	Remplacer les VAR par LET ou CONST
+    2 -	Remplacer la boucle FOR par un FOREACH sur l’objet items
+    3 -	Constantes pour les nombres magiques
+        o	QUALITY_MIN
+        o	QUALITY_MAX
+        o	FIVE_DAYS
+        o	TEN_DAYS
+    4 -	Faire une classe contenant les différentes méthodes
+    5 -	Diviser updateQuality en plusieurs fonctions (une fonction par cas)
+        o	Une fonction checkName(string) (factorise les If name )
+        o	Une fonction checkLegend(string)
+        o	Une fonction checkSellIn(number) (factorise les if sellIn )
+        o	Une fonction checkQuality(number) (factorise les if quality )
+        o	Une fonction increaseQuality(number)
+
+
+        
