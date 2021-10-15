@@ -7,6 +7,12 @@ class Item {
 }
 
 class Shop {
+    static QUALITY_MIN = 0;
+    static QUALITY_MAX = 50;
+    static FIVE_DAYS = 5;
+    static TEN_DAYS = 10;
+    static SELLIN_MIN = 0;
+
     constructor(items = []) {
         this.items = items;
     }
@@ -17,23 +23,23 @@ class Shop {
                 //Vérifie si c'est pas un Brie ET pas un Backstage
                 if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') { // Checkname x2
     
-                    if (item.quality > 0) { //CheckQuality
+                    if (item.quality > QUALITY_MIN) { //CheckQuality
                         if (item.name != 'Sulfuras, Hand of Ragnaros') { //checkName
                             item.quality = item.quality - 1; //increase
                         }
                     }
     
                 } else {
-                    if (item.quality < 50) { // checkQuality
+                    if (item.quality < QUALITY_MAX) { // checkQuality
                         item.quality = item.quality + 1; //increaseQaulity
                         if (item.name == 'Backstage passes to a TAFKAL80ETC concert') { //checkname
-                            if (item.sellIn < 11) { //checkSellIn
-                                if (item.quality < 50) { //checkQuality
+                            if (item.sellIn <= TEN_DAYS) { //checkSellIn
+                                if (item.quality < QUALITY_MAX) { //checkQuality
                                     item.quality = item.quality + 1; //increaseQuality
                                 }
                             }
-                            if (item.sellIn < 6) { //checkSellIn
-                                if (item.quality < 50) { //checkQuality
+                            if (item.sellIn <= FIVE_DAYS) { //checkSellIn
+                                if (item.quality < QUALITY_MAX) { //checkQuality
                                     item.quality = item.quality + 1; //increaseQuality
                                 }
                             }
@@ -48,10 +54,10 @@ class Shop {
                     item.sellIn = item.sellIn - 1; //increaseQuality
                 }
                 /*-------------------------------------------------------------*/
-                if (item.sellIn < 0) { //checkSellIn
+                if (item.sellIn < SELLIN_MIN) { //checkSellIn
                     if (item.name != 'Aged Brie') {//CheckName
                         if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {//CheckName
-                            if (item.quality > 0) {//CheckQuality
+                            if (item.quality > QUALITY_MIN) {//CheckQuality
                                 if (item.name != 'Sulfuras, Hand of Ragnaros') {//CheckName
                                     item.quality = item.quality - 1;//increaseQality
                                 }
@@ -60,7 +66,7 @@ class Shop {
                             item.quality = item.quality - item.quality;//mettre a zero
                         }
                     } else {
-                        if (item.quality < 50) {//checkQuality
+                        if (item.quality < QUALITY_MAX) {//checkQuality
                             item.quality = item.quality + 1; // increaseQuality
                         }
                     }

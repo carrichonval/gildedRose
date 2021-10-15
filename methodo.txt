@@ -11,6 +11,7 @@ Lister les améliorations possibles (fichier texte ou autre)
         o	QUALITY_MAX
         o	FIVE_DAYS
         o	TEN_DAYS
+        o	SELLIN_MIN
     4 -	Faire une classe contenant les différentes méthodes
     5 -	Diviser updateQuality en plusieurs fonctions (une fonction par cas)
         o	Une fonction checkName(string) (factorise les If name )
