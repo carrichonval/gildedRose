@@ -1,5 +1,5 @@
 var { expect } = require('chai');
-var { Shop, Item } = require('../src/gilded_rose_old.js');
+var { Shop, Item } = require('../src/gilded_rose_new.js');
 describe("Gilded Rose", function () {
 
     it("should foo", function () {

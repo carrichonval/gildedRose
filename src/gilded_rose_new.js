@@ -7,9 +7,12 @@ class Item {
 }
 
 class Operations{
+    constructor() {
+        
+    }
 
     increaseQuality(itemQuality,number){
-        return itemQuality += number;
+        return itemQuality + number;
     }
 
     decreaseQuality(itemQuality,number){
@@ -36,20 +39,24 @@ class Checker{
     }
 }
 
+
+const QUALITY_MIN = 0;
+const QUALITY_MAX = 50;
+const FIVE_DAYS = 5;
+const TEN_DAYS = 10;
+const SELLIN_MIN = 0;
+
 class Shop {
-    static QUALITY_MIN = 0;
-    static QUALITY_MAX = 50;
-    static FIVE_DAYS = 5;
-    static TEN_DAYS = 10;
-    static SELLIN_MIN = 0;
 
     constructor(items = []) {
         this.items = items;
     }
     updateQuality() {
         //Parcours les items
+        const operations = new Operations();
+
         this.items.forEach((item) => {
-            
+
                 //Vérifie si c'est pas un Brie ET pas un Backstage
                 if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') { // Checkname x2
     
@@ -61,16 +68,16 @@ class Shop {
     
                 } else {
                     if (item.quality < QUALITY_MAX) { // checkQuality
-                        item.quality = Operations.increaseQuality(item.quality,1);
+                        item.quality = operations.increaseQuality(item.quality,1);
                         if (item.name == 'Backstage passes to a TAFKAL80ETC concert') { //checkname
                             if (item.sellIn <= TEN_DAYS) { //checkSellIn
                                 if (item.quality < QUALITY_MAX) { //checkQuality
-                                    item.quality = Operations.increaseQuality(item.quality,1);
+                                    item.quality = operations.increaseQuality(item.quality,1);
                                 }
                             }
                             if (item.sellIn <= FIVE_DAYS) { //checkSellIn
                                 if (item.quality < QUALITY_MAX) { //checkQuality
-                                    item.quality = Operations.increaseQuality(item.quality,1);
+                                    item.quality = operations.increaseQuality(item.quality,1);
                                 }
                             }
                         }
@@ -97,7 +104,7 @@ class Shop {
                         }
                     } else {
                         if (item.quality < QUALITY_MAX) {//checkQuality
-                            item.quality = Operations.increaseQuality(item.quality,1);
+                            item.quality = operations.increaseQuality(item.quality,1);
                         }
                     }
                 }
