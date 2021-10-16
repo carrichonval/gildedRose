@@ -58,6 +58,15 @@ class Shop {
         return itemQuality;
     }
 
+    decreaseQualityItem(item, legendName) {
+        if (this.checker.checkQualityMin(item.quality,QUALITY_MIN)) {
+            if (!this.checker.checkName(item.name,legendName)) {
+                return this.operations.decrease(item.quality,1);
+            }
+        }
+        return item.quality;
+    }
+
     updateQuality() {
         //Parcours les items
 
@@ -65,13 +74,7 @@ class Shop {
 
                 //Vérifie si c'est pas un Brie ET pas un Backstage
                 if (!this.checker.checkName(item.name,'Aged Brie') && !this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-    
-                    if (this.checker.checkQualityMin(item.quality,QUALITY_MIN)) {
-                        if (!this.checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
-                            item.quality = this.operations.decrease(item.quality,1);
-                        }
-                    }
-    
+                    item.quality = this.decreaseQualityItem(item,'Sulfuras, Hand of Ragnaros');
                 } else {
                     if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
                         item.quality = this.operations.increase(item.quality,1);
@@ -96,11 +99,7 @@ class Shop {
                 if (this.checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
                     if (!this.checker.checkName(item.name,'Aged Brie')) {
                         if (!this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-                            if (this.checker.checkQualityMin(item.quality,QUALITY_MIN)) {
-                                if (!this.checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
-                                    item.quality =  this.operations.decrease(item.quality,1);
-                                }
-                            }
+                            item.quality = this.decreaseQualityItem(item,'Sulfuras, Hand of Ragnaros');
                         } else {
                             item.quality = this.operations.decrease(item.quality, item.quality);
                         }
