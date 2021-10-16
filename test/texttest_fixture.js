@@ -1,5 +1,5 @@
 
-const { Shop, Item } = require("../src/gilded_rose_new");
+const { Shop, Item, Checker, Operations } = require("../src/gilded_rose_new");
 
 const items = [
     new Item("+5 Dexterity Vest", 10, 20),
@@ -16,7 +16,7 @@ const items = [
 ];
 
 const days = Number(process.argv[2]) || 11;
-const gildedRose = new Shop(items);
+const gildedRose = new Shop(items, new Checker(), new Operations());
 
 console.log("OMGHAI!");
 for (let day = 0; day < days; day++) {

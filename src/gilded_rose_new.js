@@ -45,37 +45,44 @@ const SELLIN_MIN = 0;
 
 class Shop {
 
-    constructor(items = []) {
+    constructor(items = [], checker, operations) {
         this.items = items;
+        this.checker = checker;
+        this.operations = operations;
     }
+    
+    updateQualityItem(itemQuality){
+        if (this.checker.checkQualityMax(itemQuality,QUALITY_MAX)) {
+            return this.operations.increase(itemQuality,1);
+        }
+    }
+
     updateQuality() {
         //Parcours les items
-        const operations = new Operations();
-        const checker = new Checker();
 
         this.items.forEach((item) => {
 
                 //Vérifie si c'est pas un Brie ET pas un Backstage
-                if (!checker.checkName(item.name,'Aged Brie') && !checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
+                if (!this.checker.checkName(item.name,'Aged Brie') && !this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
     
-                    if (checker.checkQualityMin(item.quality,QUALITY_MIN)) {
-                        if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
-                            item.quality = operations.decrease(item.quality,1);
+                    if (this.checker.checkQualityMin(item.quality,QUALITY_MIN)) {
+                        if (!this.checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
+                            item.quality = this.operations.decrease(item.quality,1);
                         }
                     }
     
                 } else {
-                    if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                        item.quality = operations.increase(item.quality,1);
-                        if (checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-                            if (checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
-                                if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                                    item.quality = operations.increase(item.quality,1);
+                    if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
+                        item.quality = this.operations.increase(item.quality,1);
+                        if (this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
+                            if (this.checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
+                                if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
+                                    item.quality = this.operations.increase(item.quality,1);
                                 }
                             }
-                            if (checker.checkSellIn(item.sellIn, SIX_DAYS)) {
-                                if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                                    item.quality = operations.increase(item.quality,1);
+                            if (this.checker.checkSellIn(item.sellIn, SIX_DAYS)) {
+                                if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
+                                    item.quality = this.operations.increase(item.quality,1);
                                 }
                             }
                         }
@@ -85,25 +92,23 @@ class Shop {
                 /*-------------------------------------------------------------*/
     
                 //Si c'est Sulfuras
-                if (!checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
-                    item.sellIn =operations.decrease(item.sellIn,1);
+                if (!this.checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
+                    item.sellIn =this.operations.decrease(item.sellIn,1);
                 }
                 /*-------------------------------------------------------------*/
-                if (checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
-                    if (!checker.checkName(item.name,'Aged Brie')) {
-                        if (!checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-                            if (checker.checkQualityMin(item.quality,QUALITY_MIN)) {
-                                if (!checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
-                                    item.quality =  operations.decrease(item.quality,1);
+                if (this.checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
+                    if (!this.checker.checkName(item.name,'Aged Brie')) {
+                        if (!this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
+                            if (this.checker.checkQualityMin(item.quality,QUALITY_MIN)) {
+                                if (!this.checker.checkName(item.name,'Sulfuras, Hand of Ragnaros')) {
+                                    item.quality =  this.operations.decrease(item.quality,1);
                                 }
                             }
                         } else {
-                            item.quality = operations.decrease(item.quality, item.quality);
+                            item.quality = this.operations.decrease(item.quality, item.quality);
                         }
                     } else {
-                        if (checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                            item.quality = operations.increase(item.quality,1);
-                        }
+                        item.quality = this.updateQualityItem(item.quality);
                     }
                 }
     
@@ -114,5 +119,7 @@ class Shop {
 }
 module.exports = {
     Item,
-    Shop
+    Shop,
+    Checker,
+    Operations
 }
