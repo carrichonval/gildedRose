@@ -51,10 +51,11 @@ class Shop {
         this.operations = operations;
     }
     
-    updateQualityItem(itemQuality){
+    increaseQualityItem(itemQuality){
         if (this.checker.checkQualityMax(itemQuality,QUALITY_MAX)) {
             return this.operations.increase(itemQuality,1);
         }
+        return itemQuality;
     }
 
     updateQuality() {
@@ -76,14 +77,10 @@ class Shop {
                         item.quality = this.operations.increase(item.quality,1);
                         if (this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                             if (this.checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
-                                if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                                    item.quality = this.operations.increase(item.quality,1);
-                                }
+                                item.quality = this.increaseQualityItem(item.quality);
                             }
                             if (this.checker.checkSellIn(item.sellIn, SIX_DAYS)) {
-                                if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                                    item.quality = this.operations.increase(item.quality,1);
-                                }
+                                item.quality = this.increaseQualityItem(item.quality);
                             }
                         }
                     }
@@ -108,7 +105,7 @@ class Shop {
                             item.quality = this.operations.decrease(item.quality, item.quality);
                         }
                     } else {
-                        item.quality = this.updateQualityItem(item.quality);
+                        item.quality = this.increaseQualityItem(item.quality);
                     }
                 }
     
