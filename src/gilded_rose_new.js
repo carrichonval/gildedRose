@@ -67,6 +67,13 @@ class Shop {
         return item.quality;
     }
 
+    decreaseSellIn(item, legendName) {
+        if (!this.checker.checkName(item.name, legendName)) {
+            return this.operations.decrease(item.sellIn,1);
+        }
+        return item.sellIn;
+    }
+
     updateQuality() {
         //Parcours les items
 
@@ -76,26 +83,20 @@ class Shop {
                 if (!this.checker.checkName(item.name,'Aged Brie') && !this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
                     item.quality = this.decreaseQualityItem(item,'Sulfuras, Hand of Ragnaros');
                 } else {
-                    if (this.checker.checkQualityMax(item.quality,QUALITY_MAX)) {
-                        item.quality = this.operations.increase(item.quality,1);
-                        if (this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
-                            if (this.checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
-                                item.quality = this.increaseQualityItem(item.quality);
-                            }
-                            if (this.checker.checkSellIn(item.sellIn, SIX_DAYS)) {
-                                item.quality = this.increaseQualityItem(item.quality);
-                            }
+                    item.quality = this.increaseQualityItem(item.quality);
+                    if (this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
+                        if (this.checker.checkSellIn(item.sellIn,ELEVEN_DAYS)) {
+                            item.quality = this.increaseQualityItem(item.quality);
+                        }
+                        if (this.checker.checkSellIn(item.sellIn, SIX_DAYS)) {
+                            item.quality = this.increaseQualityItem(item.quality);
                         }
                     }
                 }
     
-                /*-------------------------------------------------------------*/
-    
                 //Si c'est Sulfuras
-                if (!this.checker.checkName(item.name, 'Sulfuras, Hand of Ragnaros')) {
-                    item.sellIn =this.operations.decrease(item.sellIn,1);
-                }
-                /*-------------------------------------------------------------*/
+                item.sellIn = this.decreaseSellIn(item, 'Sulfuras, Hand of Ragnaros');
+
                 if (this.checker.checkSellIn(item.sellIn,SELLIN_MIN)) {
                     if (!this.checker.checkName(item.name,'Aged Brie')) {
                         if (!this.checker.checkName(item.name,'Backstage passes to a TAFKAL80ETC concert')) {
